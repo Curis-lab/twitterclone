@@ -9,6 +9,7 @@ export default function handler(
         return res.status(405).end();
     }
     try{
+        console.log('successfully posted on ');
         const { email, username, name, password } = req.body;
         return res.status(200).json({email, username, name, password })
     }

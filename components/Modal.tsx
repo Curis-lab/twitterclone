@@ -1,4 +1,6 @@
 import { useCallback } from "react";
+import {AiOutlineClose} from 'react-icons/ai';
+
 
 interface ModalProps{
     isOpen: boolean;
@@ -26,7 +28,7 @@ const Modal:React.FC<ModalProps>=({
             return;
         }
         onClose();
-    },[]);
+    },[onClose]);
     if(!isOpen){
         return null;
     }
@@ -46,8 +48,34 @@ const Modal:React.FC<ModalProps>=({
             focus:outline-none
             bg-neutral-800
             bg-opacity-70">
-                <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto"></div>
-                <h1 className="text-white"> hello</h1>
+                <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+                    {/* Content */}
+                    <div className="h-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-black outline-none focus:outline-none">
+                        {/* Header */}
+                        <div className="flex items-center justify-center p-10">
+                            <h3 className="text-3xl font-semibold text-white">{title}</h3>
+                            <button
+                            className="
+                            p-1
+                            ml-auto
+                            border-0
+                            text-white
+                            hover: opacity-70
+                            transition"
+                            onClick={handleClose}
+                            >
+                                <AiOutlineClose size={20} color="white"/>         
+                            </button>
+                        </div>
+                        <div className="relative p-10 flex-auto">
+                            {body}
+                        </div>
+                        <div className="flex flex-col gap-2 p-10">
+                            <button className="bg-white text-black p-5" onClick={onSubmit}>Submit</button>
+                            {footer}
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
