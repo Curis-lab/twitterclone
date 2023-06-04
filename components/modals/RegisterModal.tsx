@@ -1,4 +1,4 @@
-import React, { use, useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Modal from '../Modal';
 import Input from '../Input';
 import axios from 'axios';
@@ -12,14 +12,6 @@ const RegisterModal=()=> {
   const [isLoading, setIsLoading] = useState(false);
 
   
-  // const onSubmit = useCallback(async()=>{
-  //   try{
-  //     await
-  //     console.log('onSubmiting');
-  //   }catch(error){
-  //     console.log(error);
-  //   }
-  // },[])
   const onSubmit = useCallback(
     async()=>{
       console.log(email, password, name, username, isLoading);
@@ -30,8 +22,7 @@ const RegisterModal=()=> {
         name
       });
       console.log('onSubmit');
-    },[email, password, username, name]
-  ) 
+    },[email, password, username, name]); 
 
   const bodyContent =(
     <div className='flex flex-col gap-4'>
@@ -57,6 +48,7 @@ const RegisterModal=()=> {
       disabled={isLoading}/>
     </div>
   )
+
   const footerContent =(
     <div>
       <p>Already have an account?
@@ -64,10 +56,11 @@ const RegisterModal=()=> {
       </p>
     </div>
   )
+
   return (
     <Modal
       disabled={false}
-      isOpen={true}
+      isOpen={false}
       title='create an account'
       actionLabel='Register'
       onClose={()=>{}}

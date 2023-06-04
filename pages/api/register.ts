@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import bcrypt from 'bcrypt';
+import client from "@/libs/prismadb";
 
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ){
@@ -11,7 +13,17 @@ export default function handler(
     try{
         console.log('successfully posted on ');
         const { email, username, name, password } = req.body;
-        return res.status(200).json({email, username, name, password })
+
+        const hashedPassword = await bcrypt.hash(password,  12);
+        const user = await client.user.create({
+            data:{
+                email,
+                username,
+                name,
+                hashedPassword
+            }
+        });
+        return res.status(200).json(user)
     }
     catch(error){
         console.log(error);

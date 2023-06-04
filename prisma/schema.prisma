@@ -17,4 +17,5 @@ model User{
   bio String?
   email String? @unique
   emailVeried DateTime?
+  hashedPassword String?
 }
