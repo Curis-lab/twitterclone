@@ -3,6 +3,6 @@ const Sidebar = ()=>{
     const items = [
         {label: 'Home'}
     ]
-    return(<div>SideBar</div>)
+    return(<div className="text-white">SideBar</div>)
 }
 export default Sidebar;
