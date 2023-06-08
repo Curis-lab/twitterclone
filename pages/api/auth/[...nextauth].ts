@@ -35,6 +35,7 @@ export default NextAuth({
                 if(!isCorrectPassword){
                     throw new Error('Invalid credentials');
                 }
+                //finally return only user data from mongodb
                 return user;
             }
         })

@@ -2,7 +2,8 @@ import useLoginModal from "@/hooks/useLoginModal"
 import { useCallback, useState } from "react";
 import Modal from "../Modal";
 import Input from "../Input";
-import axios from "axios";
+import {signIn} from 'next-auth/react';
+import { toast } from "react-hot-toast";
 
 const LoginModal=()=>{
 
@@ -16,9 +17,15 @@ const LoginModal=()=>{
         //get data from database and check it
         console.log('onSubmit');
         
-        await axios.get('/api/current',{
-            //get some data
-        })
+        try{
+            await signIn('credentials',{email, password});
+        }catch(error){
+            console.log(error);
+            toast.error('something went wrong');
+        }finally{
+            setIsLoading(false);
+        }
+
     },[email, password]) 
     const bodyContent=(
         <div className='flex flex-col gap-4'>
@@ -37,8 +44,7 @@ const LoginModal=()=>{
     return(
         <Modal
             disabled={false}
-            isOpen = {true}
-            title="login account"
+            isOpen = {false}
             actionLabel="Login"
             onClose={()=>{}}
             onSubmit={onSubmit}
